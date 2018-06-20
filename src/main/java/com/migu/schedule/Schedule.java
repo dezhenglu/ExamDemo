@@ -60,8 +60,22 @@ public class Schedule {
         if (!nodeExists(nodeId)){
             return ReturnCodeKeys.E007;
         }
-        nodes.remove(nodeId);
-        return ReturnCodeKeys.E006;
+
+        int len = nodes.size();
+        int removeIndex = -1;
+        for(int i = 0; i < len; i++){
+            NodeInfo nodeInfo = nodes.get(i);
+            if(nodeInfo.getNodeId() == nodeId){
+                removeIndex = i;
+                break;
+            }
+        }
+        if(removeIndex != -1){
+            nodes.remove(nodeId);
+            return ReturnCodeKeys.E006;
+        }
+
+        return ReturnCodeKeys.E016;
     }
 
 
